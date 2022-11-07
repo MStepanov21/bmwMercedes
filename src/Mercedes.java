@@ -1,11 +1,10 @@
-public class Mercedes {
-    String name;
-    String infoG200;
-    String infoGLE250;
-    String infoGLS350;
-    String infoS320;
-    int priceG200;
-    int priceGLE250;
-    int priceGLS350;
-    int priceS320;
+public class Mercedes  extends  Auto{
+    public Mercedes(String name) {
+        super(name);
+    }
+
+    @Override
+    public void signal() {
+        System.out.println("Mercedes сигналит");
+    }
 }

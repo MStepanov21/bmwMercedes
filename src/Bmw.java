@@ -1,10 +1,10 @@
-public class Bmw {
-    String name1;
-    String infoM8;
-    String infoX5;
-    String infoI8;
-    int priceM8;
-    int priceX5;
-    int priceI8;
+public class Bmw extends Auto{
+    public Bmw (String name){
+        super(name);
+    }
 
+    @Override
+    public void signal(){
+        System.out.println("BMW Signalit");
+    }
 }
