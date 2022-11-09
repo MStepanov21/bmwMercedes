@@ -7,17 +7,20 @@ public class Menu {
     private int index = 0;
     private Scanner sc = new Scanner(System.in);
     private Auto [] autos = new Auto[100];
+    private MetaloBaza metaloBaza = new MetaloBaza();
 
     public void menuStart(){
         System.out.println(balanc + "$");
         System.out.println("1 купить авто");
         System.out.println("2 показать купленные авто");
         System.out.println("3 пополнить баланс");
+        System.out.println("отправить на металобазу");
         String menuchoose = sc.nextLine();
         switch (menuchoose) {
             case "1" -> {menuShopAuto();menuStart();}
             case "2" -> {menuAutoPark(); menuStart();}
             case "3" -> {popolnenieBalanc();}
+            case "4" -> {metaloBaza();}
         }
 
 
@@ -51,7 +54,7 @@ public class Menu {
         public void menuAutoPark() {
             for (int i = 0; i < autos.length; i++) {
                 if (autos[i] != null){
-                    System.out.println(autos[i].name);
+                    System.out.println( i + "номер авто "+ autos[i].name);
                 }
 
                 }
@@ -60,35 +63,40 @@ public class Menu {
 
         //покупку бмв и добавить еще один автомобиль
 
-    private void popolnenieBalanc(){
+    private void popolnenieBalanc() {
         System.out.println("На какую сумму вы хотите пополнить баланс");
         int summa = sc.nextInt();
         sc.nextLine();
-        if(balanc > 100_000){
-            if(summa <= 50_000) {
-                balanc = balanc + summa;
-                menuStart();
-            }else {
-                System.out.println("операция не прошла");
-                popolnenieBalanc();
-            }
-        }else if(balanc <= 100_000 && balanc >= 50_000) {
-            if(summa <= 150_000) {
-                balanc = balanc + summa;
-                menuStart();
-            } else {
-                System.out.println("Операция не прошла");
-                popolnenieBalanc();
-            }
-        }else if(balanc < 50_000) {
-            if( summa <= 250_000){
-                balanc = balanc + summa;
-                menuStart();
-            }else {
-                System.out.println("Операция не прошла");
-                popolnenieBalanc();
-            }
+
+        if (summa<1){
+            System.out.println("Операция не прошла");
+            menuStart();
         }
+
+        if (balanc > 100_000 && summa <= 50_000) {
+            balanc = balanc + summa;
+            menuStart();
+        } else if (balanc <= 100_000 && balanc >= 50_000 && summa <= 150_000) {
+            balanc = balanc + summa;
+            menuStart();
+
+        } else if (balanc < 50_000 && summa <= 250_000) {
+            balanc = balanc + summa;
+            menuStart();
+        } else {
+            System.out.println("Операция не прошла");
+            popolnenieBalanc();
+        }
+    }
+
+    public void metaloBaza(){
+        System.out.println("выберите авто для отправки на металобазу");
+        menuAutoPark();
+        int otvet = sc.nextInt();
+        sc.nextLine();
+        balanc = balanc + metaloBaza.utilAuto(autos[otvet]);
+        autos[otvet] = null;
+        menuStart();
 
     }
 

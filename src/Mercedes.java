@@ -5,6 +5,6 @@ public class Mercedes  extends  Auto{
 
     @Override
     public void signal() {
-        System.out.println("Mercedes сигналит");
+        System.out.println("signalit");
     }
 }
